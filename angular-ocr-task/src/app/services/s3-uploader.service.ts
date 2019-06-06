@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import { environment } from 'src/environments/environment';
+import { MessagerService } from './messager.service';
+
 // import { MatSnackBar } from '@angular/material';
 
 
@@ -10,20 +12,16 @@ import { environment } from 'src/environments/environment';
 export class S3UploaderService {
 
   constructor(
-    // private _snackBar: MatSnackBar,
+    public MessagerService: MessagerService,
 
   ) { }
 
   private s3AccessKeyId = `${environment.s3AccessKeyId}`;
   private s3SecretAccessKey = `${environment.s3SecretAccessKey}`;
-  private snackBarDurationInSeconds = 2;
-  private snackBarMessage = '';
+
 
 
   uploadFile(file) {
-
-    this.snackBarMessage = "Image is uploading, please wait..."
-    // this._snackBar.open(this.snackBarMessage, null);
 
     return new Promise((resolve, reject) => {
 
@@ -45,24 +43,28 @@ export class S3UploaderService {
         ContentType: contentType
       };
 
-      // bucket.upload(params, function (err, data) {
-      //   if (err) {
-      //     reject(err);
-      //   }
-      //   resolve(data.Location);
-      // });
-
 
       bucket.upload(params).on('httpUploadProgress', function (evt) {
         console.log("S3 Uploading " + evt.loaded + ' of ' + evt.total + ' Bytes');
+        const messageText = "S3 Uploading " + evt.loaded + ' of ' + evt.total + ' Bytes';
+
       }).send(function (err, data) {
         if (err) {
           console.log('There was an error uploading your file: ', err);
           reject(err);
         }
         console.log('Successfully uploaded file.', data);
+
         resolve(data.Location);
+
       });
+
+      // bucket.upload(params, function (err, data) {
+      //   if (err) {
+      //     reject(err);
+      //   }
+      //   resolve(data.Location);
+      // });
 
 
 

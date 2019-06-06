@@ -9,9 +9,20 @@
     <div class="col-md-4 selectFile-sytle">
       <button (click)="uploadImage()" [disabled]="!selectedFiles"
         class="btn btn-success button-style button-style">Upload</button>
-      <button (click)="ocrImage()" [disabled]="!selectedFiles" class="btn btn-info button-style">Recognize</button>
+      <button *ngIf="!isRecognizing" (click)="ocrImage()" class="btn btn-info button-style">Recognize</button>
+      <button *ngIf="isRecognizing" class="btn btn-info button-style">Progress:{{progressPerce}}%</button>
+
     </div>
 
+  </div>
+
+  <div class="row selectFile-sytle">
+    <button (click)="exampleImage('1')" class="btn btn-info button-style">Example Image
+      1</button>
+    <button (click)="exampleImage('2')" class="btn btn-info button-style">Example Image
+      2</button>
+    <button (click)="exampleImage('3')" class="btn btn-info button-style">Example Image
+      3</button>
   </div>
 
   <div class="row">

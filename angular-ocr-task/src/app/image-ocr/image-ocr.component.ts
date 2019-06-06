@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TesseractWorker } from 'tesseract.js';
 import { S3UploaderService } from 'src/app/services/s3-uploader.service';
+import { MessagerService } from '../services/messager.service';
+
 
 
 @Component({
@@ -18,21 +20,25 @@ export class ImageOcrComponent implements OnInit {
   public inputedImage = new Image();
   public inputedImageURL = "https://fakeimg.pl/350x350/282828/EAE0D0/?text= No Image"
   public ocrResult;
-  public SDKInitPerce;
-  public progressPerce;
+  public progressPerce: Number = 0;
+  public isRecognizing: Boolean = false;
+
 
 
   constructor(
     private S3UploaderService: S3UploaderService,
+    private MessagerService: MessagerService,
   ) { }
 
   ngOnInit() {
     this.setInputedImageURL(this.inputedImageURL)
+
   }
 
   selectFile(event) {
     this.selectedFileName = event.target.files[0].name;
     this.selectedFiles = event.target.files;
+    this.MessagerService.openSnackBar("One File Seclected", 1, null);
   }
 
   async uploadImage() {
@@ -48,20 +54,41 @@ export class ImageOcrComponent implements OnInit {
 
   }
 
+  exampleImage(_imageNo) {
+    const imagePath = '../../assets/images/handwritten' + _imageNo + '.jpg'
+    this.inputedImage.src = imagePath
+  }
+
 
   ocrImage() {
 
-    const worker = new TesseractWorker();
+    this.isRecognizing = true;
+    this.MessagerService.openSnackBar("Preparing for recognizing..", null, null);
 
+    const worker = new TesseractWorker();
     worker.recognize(this.inputedImage)
       .progress(progress => {
         console.log('progress', progress);
-        this.progressPerce = progress.progress * 100;
+
+        if (progress.status === "recognizing text") {
+
+          this.MessagerService.closeSnackBar();
+          this.progressPerce = progress.progress * 100;
+          this.progressPerce = Math.round(this.progressPerce);
+
+        }
+
+
+
       }).then(result => {
         console.log('result', result);
+        this.MessagerService.openSnackBar("The Image has Recongized", 1, null);
 
         this.ocrResult = result.text
         console.log('this.ocrResult:', this.ocrResult)
+        this.progressPerce = 0;
+        this.isRecognizing = false;
+
 
       });
   }
