@@ -111,11 +111,11 @@ export class ImageOcrComponent implements OnInit {
 
 
       }).then(result => {
-        console.log('result', result);
+        // console.log('result', result);
         this.MessagerService.openSnackBar("The Image has Recongized", 2, null);
 
         this.ocrResult = result.text
-        console.log('this.ocrResult:', this.ocrResult)
+        // console.log('this.ocrResult:', this.ocrResult)
         this.progressPerce = 0;
         this.isRecognizing = false;
         this.progressMessage = null;
