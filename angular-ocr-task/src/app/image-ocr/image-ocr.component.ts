@@ -41,22 +41,20 @@ export class ImageOcrComponent implements OnInit {
 
   selectFile(event) {
 
-    console.log(event.target.files[0])
-
     if (event.target.files[0].size > 2048000) {
       this.MessagerService.openSnackBar("This image should less than 2MB, Please try another Image", 3, null)
       return
     } else {
 
       if (event.target.files[0].type !== "image/png" && event.target.files[0].type !== "image/jpeg") {
-        this.MessagerService.openSnackBar("Selected Rejected, PNG OR JPGE Only", 2, null);
+        this.MessagerService.openSnackBar("Selected Rejected, PNG OR JPGE Only", 3, null);
         return
       } else {
         this.ocrResult = null;
-        this.setInputedImageURL("https://fakeimg.pl/350x350/282828/EAE0D0/?text= Upload Now");
+        this.setInputedImageURL("https://fakeimg.pl/350x350/282828/EAE0D0/?text= Push Upload");
         this.selectedFileName = event.target.files[0].name;
         this.selectedFiles = event.target.files;
-        this.MessagerService.openSnackBar("One File Seclected", 2, null);
+        this.MessagerService.openSnackBar("One File Seclected", 3, null);
       }
 
 
@@ -71,7 +69,7 @@ export class ImageOcrComponent implements OnInit {
     const file = this.selectedFiles.item(0);
     const URL = await this.S3UploaderService.uploadFile(file);
     this.setInputedImageURL(URL);
-    console.log("After upload, URL:", URL);
+    // console.log("After upload, URL:", URL);
 
   }
 
@@ -93,7 +91,6 @@ export class ImageOcrComponent implements OnInit {
     this.isRecognizing = true;
     this.ocrResult = null;
     this.progressMessage = "Preparing for recognizing..."
-    this.MessagerService.openSnackBar("Preparing for recognizing...", null, null);
 
     const worker = new TesseractWorker();
     worker.recognize(this.inputedImage)
@@ -115,7 +112,7 @@ export class ImageOcrComponent implements OnInit {
 
       }).then(result => {
         console.log('result', result);
-        this.MessagerService.openSnackBar("The Image has Recongized", 1, null);
+        this.MessagerService.openSnackBar("The Image has Recongized", 2, null);
 
         this.ocrResult = result.text
         console.log('this.ocrResult:', this.ocrResult)

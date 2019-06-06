@@ -45,15 +45,15 @@ export class S3UploaderService {
 
 
       bucket.upload(params).on('httpUploadProgress', function (evt) {
-        console.log("S3 Uploading " + evt.loaded + ' of ' + evt.total + ' Bytes');
+        // console.log("S3 Uploading " + evt.loaded + ' of ' + evt.total + ' Bytes');
         const messageText = "S3 Uploading " + evt.loaded + ' of ' + evt.total + ' Bytes';
 
       }).send(function (err, data) {
         if (err) {
-          console.log('There was an error uploading your file: ', err);
+          // console.log('There was an error uploading your file: ', err);
           reject(err);
         }
-        console.log('Successfully uploaded file.', data);
+        // console.log('Successfully uploaded file.', data);
 
         resolve(data.Location);
 
