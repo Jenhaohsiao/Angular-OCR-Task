@@ -9,6 +9,10 @@ import { ImageOcrComponent } from './image-ocr/image-ocr.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgbModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

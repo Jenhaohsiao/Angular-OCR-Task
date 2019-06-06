@@ -23,7 +23,7 @@
 
 .image-section {
 
-  background-color: rgb(33, 106, 171);
+  background-color: rgb(125, 167, 204);
   min-height: 430px;
   height: auto;
 
@@ -33,13 +33,14 @@
 
   width: 350px;
   height: auto;
-  margin: auto;
+  margin: 10px auto 30px auto;
   display: block;
 }
 
 .result-section {
 
-  background-color: aliceblue;
+  background-color: rgb(254, 198, 176);
+  min-height: 430px;
 }
 
 .place-center {
