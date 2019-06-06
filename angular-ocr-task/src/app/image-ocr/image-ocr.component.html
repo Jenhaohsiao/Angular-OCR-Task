@@ -1,0 +1,30 @@
+<div class="container main-section">
+
+  <div class="row upload-section  ">
+    <div class="col-md-8 custom-file selectFile-sytle">
+      <input (change)="selectFile($event)" type="file" class="custom-file-input" id="validatedCustomFile">
+      <label class="custom-file-label" for="validatedCustomFile">{{selectedFileName}}</label>
+      <div class="invalid-feedback">Example invalid custom file feedback</div>
+    </div>
+    <div class="col-md-4 selectFile-sytle">
+      <button (click)="uploadImage()" [disabled]="!selectedFiles"
+        class="btn btn-success button-style button-style">Upload</button>
+      <button (click)="ocrImage()" [disabled]="!selectedFiles" class="btn btn-info button-style">Recognize</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 image-section">
+      <img src="{{inputedImage.src}}" class="image-displayed-section">
+    </div>
+
+    <div class="col-md-6 result-section">
+      <h4>Result:</h4>
+      {{ocrResult}}
+    </div>
+  </div>
+  Progress:{{progressPerce}}%
+
+</div>

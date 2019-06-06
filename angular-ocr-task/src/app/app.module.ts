@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ImageOcrComponent } from './image-ocr/image-ocr.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ImageOcrComponent
   ],
   imports: [
     BrowserModule,

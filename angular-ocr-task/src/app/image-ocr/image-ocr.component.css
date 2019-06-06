@@ -1,0 +1,41 @@
+.upload-section {
+
+  margin: 10px 0;
+  padding: 30px 0 0 0;
+}
+
+.upload-label {
+  /* width: 400px; */
+}
+
+.selectFile-sytle {
+  margin: 10px 0;
+}
+
+.button-style {
+  margin: 0 10px 0 0;
+}
+
+.main-section {
+  background-color: rgb(238, 225, 209);
+  height: 100vh;
+}
+
+.image-section {
+
+  background-color: rgb(33, 106, 171);
+
+}
+
+.image-displayed-section {
+
+  max-width: 350px;
+  height: auto;
+  margin: auto;
+  display: block;
+}
+
+.result-section {
+
+  background-color: aliceblue;
+}
