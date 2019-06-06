@@ -24,12 +24,14 @@
 .image-section {
 
   background-color: rgb(33, 106, 171);
+  min-height: 430px;
+  height: auto;
 
 }
 
 .image-displayed-section {
 
-  max-width: 350px;
+  width: 350px;
   height: auto;
   margin: auto;
   display: block;
@@ -38,4 +40,10 @@
 .result-section {
 
   background-color: aliceblue;
+}
+
+.place-center {
+  margin: auto;
+  display: block;
+  text-align: center;
 }

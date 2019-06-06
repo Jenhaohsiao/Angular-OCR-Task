@@ -63,6 +63,7 @@ export class ImageOcrComponent implements OnInit {
   ocrImage() {
 
     this.isRecognizing = true;
+    this.ocrResult = null;
     this.MessagerService.openSnackBar("Preparing for recognizing..", null, null);
 
     const worker = new TesseractWorker();
@@ -73,9 +74,10 @@ export class ImageOcrComponent implements OnInit {
         if (progress.status === "recognizing text") {
 
           this.MessagerService.closeSnackBar();
-          this.progressPerce = progress.progress * 100;
-          this.progressPerce = Math.round(this.progressPerce);
+          this.progressPerce = Math.round(progress.progress * 100);
 
+        } else {
+          return
         }
 
 
